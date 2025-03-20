@@ -4,7 +4,6 @@ import com.example.crud.entity.Books;
 import com.example.crud.repository.BooksRepository;
 import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.crossstore.ChangeSetPersister;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -25,6 +24,10 @@ public class BooksService {
 
     public List<Books> findByMainGenreOrSubGenre(String genre){
         return booksRepository.findByMainGenreOrSubGenre(genre, genre);
+    }
+
+    public Books postBooks(Books book){
+        return booksRepository.save(book);
     }
 
     public List<Books> findByAuthor(String author){

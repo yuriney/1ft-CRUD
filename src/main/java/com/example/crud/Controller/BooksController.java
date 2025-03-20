@@ -1,4 +1,4 @@
-package com.example.crud.http;
+package com.example.crud.Controller;
 
 import com.example.crud.entity.Books;
 import com.example.crud.service.BooksService;
@@ -13,6 +13,7 @@ import java.util.List;
 public class BooksController {
     @Autowired
     BooksService booksService;
+
 
     @GetMapping
     @ResponseStatus(HttpStatus.OK)
@@ -37,4 +38,8 @@ public class BooksController {
     public List<Books> getBooksByAuthor(@PathVariable String author){
         return booksService.findByAuthor(author);
     }
+
+    @PostMapping
+    @ResponseStatus(HttpStatus.CREATED)
+    public Books SalvarLivro(@RequestBody Books book) { return booksService.postBooks(book);}
 }

@@ -1,14 +1,12 @@
-package com.example.crud.http;
+package com.example.crud.Controller;
 
 import com.example.crud.entity.Customer;
 import com.example.crud.service.CustomerService;
-import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.Optional;
 
 @RestController
 @RequestMapping("/customer")
