@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.UUID;
 
 @Service
 public class BooksService {
@@ -32,5 +33,9 @@ public class BooksService {
 
     public List<Books> findByAuthor(String author){
         return booksRepository.findByAuthor(author);
+    }
+
+    public void deleteBookById(Long id){
+        booksRepository.deleteById(id);
     }
 }

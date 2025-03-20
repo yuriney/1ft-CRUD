@@ -23,7 +23,7 @@ public class BooksController {
 
     @GetMapping("/{id}")
     @ResponseStatus(HttpStatus.OK)
-    public Books getBookByID(@PathVariable Long id){
+    public Books getBookByID(@PathVariable long id){
         return booksService.getBookById(id);
     }
 
@@ -42,4 +42,10 @@ public class BooksController {
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     public Books SalvarLivro(@RequestBody Books book) { return booksService.postBooks(book);}
+
+    @DeleteMapping("/{id}")
+    @ResponseStatus(HttpStatus.OK)
+    public void deleteBook(@PathVariable Long id){
+        booksService.deleteBookById(id);
+    }
 }
