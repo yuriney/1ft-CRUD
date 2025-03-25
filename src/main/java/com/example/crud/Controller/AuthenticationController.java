@@ -1,8 +1,10 @@
 package com.example.crud.Controller;
 
 import com.example.crud.entity.User.AuthenticationDTO;
+import com.example.crud.entity.User.LoginResponseDTO;
 import com.example.crud.entity.User.RegisterDTO;
 import com.example.crud.entity.User.User;
+import com.example.crud.infra.security.TokenService;
 import com.example.crud.repository.UserRepository;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,13 +25,16 @@ public class AuthenticationController {
     AuthenticationManager authenticationManager;
     @Autowired
     private UserRepository userRepository;
+    @Autowired
+    private TokenService tokenService;
 
     @PostMapping("/login")
     public ResponseEntity login(@RequestBody @Valid AuthenticationDTO data){
         var usernamePassword = new UsernamePasswordAuthenticationToken(data.login(), data.password());
         var auth = this.authenticationManager.authenticate(usernamePassword);
 
-        return ResponseEntity.ok().build();
+        var token = tokenService.generateToken((User)auth.getPrincipal());
+        return ResponseEntity.ok(new LoginResponseDTO(token));
     }
     @PostMapping("/register")
     public ResponseEntity register(@RequestBody @Valid RegisterDTO data){
